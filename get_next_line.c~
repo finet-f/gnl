@@ -137,7 +137,7 @@ int		get_next_line(const int fd, char **list)
   if (c == '\n')
     return (0);
   list[j] = ft_realloc(list[j]); 
-  get_next_line2(&list[j], rest, i, j, fd);
+  get_next_line2(&list[j], rest, &i, j, fd);
   printf("%s\n", list[j]);
   return (get_next_line(fd, &list[j++]));
  }
