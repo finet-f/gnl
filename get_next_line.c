@@ -6,7 +6,7 @@
 /*   By: flfinet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/11 10:57:18 by flfinet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/15 16:21:52 by flfinet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/16 13:42:56 by flfinet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -72,11 +72,11 @@ int				get_next_lin3(char **line, int *i, char buff[BUFF_SIZE + 1],
 	k = 0;
 	while (buff[k] != '\0' && buff[k] != '\n')
 	{
-		line[0][*i] = buff[k];
+		line[*i] = &buff[k];
 		*i = *i + 1;
 		k++;
 	}
-	line[0][*i] = '\0';
+	line[*i] = NULL;
 	if (buff[k] == '\n')
 	{
 		*i = 0;
@@ -101,16 +101,16 @@ char			*get_next_line2(char **line, char *rest, int i, int fd)
 	while (1)
 	{
 		r = read(fd, buff, BUFF_SIZE);
-		if (r == -1 || (r == 0 && line[0] == '\0'))
+		if (r == -1 || (r == 0 && *line == NULL))
 			return (NULL);
 		if (r == 0)
-			return (line[0]);
+			return (*line);
 		buff[r] = '\0';
-		line[0] = ft_realloc(line[0]);
-		if (get_next_lin3(&line[0], &i, buff, rest) == 1)
-			return (line[0]);
+		*line = ft_realloc(*line);
+		if (get_next_lin3(line, &i, buff, rest) == 1)
+			return (*line);
 	}
-	return (line[0]);
+	return (*line);
 }
 
 int				get_next_line(const int fd, char **line)
@@ -125,22 +125,22 @@ int				get_next_line(const int fd, char **line)
 		rest[0] = 0;
 	}
 	i = 0;
-	if ((line == malloc(sizeof(char*) * 150) == 0))
- 	  return (-1);
-	line[0] = ft_realloc(line[0]);
+	*line = ft_realloc(*line);
 	while (rest[i] != '\n' && rest[i] != '\0')
 	{
-		line[0][i] = rest[i];
+		*line[i] = rest[i];
 		i++;
 	}
-	line[0][i] = '\0';
+	*line[i] = '\0';
 	c = rest[i];
 	rest = modif_rest(rest, i);
 	if (c == '\n')
 		return (0);
-	printf("%s\n", line[0]);
-	line[0] = ft_realloc(line[0]);
-	printf("%s\n", line[0]);
-	get_next_line2(&line[0], rest, i, fd);
-	return (get_next_line(fd, line));
+	*line = ft_realloc(*line);
+	get_next_line2(line, rest, i, fd);
+	*line = rest;
+	if (rest != NULL)
+	  return (get_next_line(fd, line));
+	else 
+	  return (0);
 }
