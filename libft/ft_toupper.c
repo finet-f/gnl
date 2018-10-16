@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   get_next_line.h                                  .::    .:/ .      .::   */
+/*   ft_toupper.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: flfinet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/16 17:43:54 by flfinet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/16 17:44:39 by flfinet     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/10/08 18:29:57 by flfinet      #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/08 18:31:21 by flfinet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# ifndef BUFF_SIZE
-#  define BUFF_SIZE (100)
-# endif
-
-int	get_next_line(const int fd, char **line);
-
-#endif
+int	ft_toupper(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (c -= 32);
+	return (c);
+}

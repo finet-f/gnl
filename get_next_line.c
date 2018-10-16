@@ -1,50 +1,23 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   get_next_line.c                                  .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: flfinet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/11 10:57:18 by flfinet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/16 13:42:56 by flfinet     ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: flfinet <flfinet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/16 17:46:44 by flfinet           #+#    #+#             */
+/*   Updated: 2018/10/16 17:54:28 by flfinet          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "get_next_line.h"
+#include "libft/include/libft.h"
 
-char			*ft_realloc(char *str)
-{
-	char		*new;
-	int			l;
-	int			i;
-
-	i = 0;
-	l = 0;
-	if (str == NULL || str[0] == 0)
-		l = 1;
-	else
-		while (str[l])
-			l++;
-	new = malloc(sizeof(char) * (l * BUFF_SIZE + 1));
-	if (new == NULL)
-		return (NULL);
-	if (str != NULL)
-	{
-		while (str[i])
-		{
-			new[i] = str[i];
-			i++;
-		}
-	}
-	new[i] = '\0';
-	return (new);
-}
-
-char			*modif_rest(char *rest, int i)
+char			*modif_rest(char *rest, int *i)
 {
 	char		*new;
 	int			j;
@@ -52,12 +25,12 @@ char			*modif_rest(char *rest, int i)
 	j = 0;
 	new = NULL;
 	new = ft_realloc(new);
-	if (rest[i] == '\n')
-		i++;
-	while (rest[i])
+	if (rest[*i] == '\n')
+		*i = *i + 1;
+	while (rest[*i])
 	{
-		new[j] = rest[i];
-		i++;
+		new[j] = rest[*i];
+		*i = *i + 1;
 		j++;
 	}
 	new[j] = '\0';
@@ -75,6 +48,8 @@ int				get_next_lin3(char **line, int *i, char buff[BUFF_SIZE + 1],
 		line[*i] = &buff[k];
 		*i = *i + 1;
 		k++;
+		if (*i == BUFF_SIZE - 1)
+			*line = ft_realloc(*line);
 	}
 	line[*i] = NULL;
 	if (buff[k] == '\n')
@@ -87,7 +62,8 @@ int				get_next_lin3(char **line, int *i, char buff[BUFF_SIZE + 1],
 			*i = *i + 1;
 			k++;
 		}
-		rest[*i] = '\0';
+      printf("%s\n", rest);
+      rest[*i] = '\0';
 		return (1);
 	}
 	return (0);
@@ -110,6 +86,7 @@ char			*get_next_line2(char **line, char *rest, int i, int fd)
 		if (get_next_lin3(line, &i, buff, rest) == 1)
 			return (*line);
 	}
+	free(buff);
 	return (*line);
 }
 
@@ -133,14 +110,11 @@ int				get_next_line(const int fd, char **line)
 	}
 	*line[i] = '\0';
 	c = rest[i];
-	rest = modif_rest(rest, i);
+	rest = modif_rest(rest, &i);
 	if (c == '\n')
 		return (0);
 	*line = ft_realloc(*line);
 	get_next_line2(line, rest, i, fd);
-	*line = rest;
-	if (rest != NULL)
-	  return (get_next_line(fd, line));
-	else 
-	  return (0);
+	printf("%s", *line);
+	return (0);
 }

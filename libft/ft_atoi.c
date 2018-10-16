@@ -1,23 +1,43 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   get_next_line.h                                  .::    .:/ .      .::   */
+/*   ft_atoi.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: flfinet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/16 17:43:54 by flfinet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/16 17:44:39 by flfinet     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/10/08 18:09:38 by flfinet      #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/08 18:11:30 by flfinet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# ifndef BUFF_SIZE
-#  define BUFF_SIZE (100)
-# endif
+int	ft_atoi(const char *str)
+{
+	long long	r;
+	long long	n;
+	long long	p;
 
-int	get_next_line(const int fd, char **line);
-
-#endif
+	r = 0;
+	n = 0;
+	p = 0;
+	while (str[p] == '\t' || str[p] == '\n' || str[p] == '\r' ||
+			str[p] == '\v' || str[p] == '\f' || str[p] == ' ' ||
+			(str[p] == '+' && (str[p + 1] != '+' &&
+					str[p + 1] != '-')))
+		p++;
+	if (str[p] == '-')
+	{
+		n = -1;
+		p++;
+	}
+	while (str[p] >= '0' && str[p] <= '9')
+	{
+		r = r * 10 + str[p] - '0';
+		p++;
+	}
+	if (n)
+		r = -r;
+	return (r);
+}

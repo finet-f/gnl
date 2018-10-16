@@ -1,23 +1,43 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   get_next_line.h                                  .::    .:/ .      .::   */
+/*   ft_realloc.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: flfinet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/16 17:43:54 by flfinet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/16 17:44:39 by flfinet     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/10/16 17:27:27 by flfinet      #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/16 17:45:13 by flfinet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
+#include <stdlib.h>
 
-# ifndef BUFF_SIZE
-#  define BUFF_SIZE (100)
-# endif
+char		*ft_realloc(char *str)
+{
+	char	*new;
+	int		l;
+	int		i;
 
-int	get_next_line(const int fd, char **line);
-
-#endif
+	i = 0;
+	l = 0;
+	if (str == NULL || str[0] == 0)
+		l = 1;
+	else
+		while (str[l])
+			l++;
+	new = malloc(sizeof(char) * (l * BUFF_SIZE + 1));
+	if (new == NULL)
+		return (NULL);
+	if (str != NULL)
+	{
+		while (str[i])
+		{
+			new[i] = str[i];
+			i++;
+		}
+	}
+	new[i] = '\0';
+	return (new);
+}

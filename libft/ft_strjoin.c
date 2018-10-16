@@ -1,23 +1,41 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   get_next_line.h                                  .::    .:/ .      .::   */
+/*   ft_strjoin.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: flfinet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/16 17:43:54 by flfinet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/16 17:44:39 by flfinet     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/10/09 16:06:05 by flfinet      #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/09 16:08:50 by flfinet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
+#include <stdlib.h>
 
-# ifndef BUFF_SIZE
-#  define BUFF_SIZE (100)
-# endif
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*tr;
+	int		i;
+	int		j;
 
-int	get_next_line(const int fd, char **line);
-
-#endif
+	i = 0;
+	j = 0;
+	tr = NULL;
+	if (s1 && s2)
+	{
+		if (!(tr = (char*)malloc(sizeof(*tr) * (ft_strlen(s1) +
+							ft_strlen(s2) + 1))))
+			return (NULL);
+		while (s1[i])
+		{
+			tr[i] = s1[i];
+			i++;
+		}
+		while (s2[j])
+			tr[i++] = s2[j++];
+		tr[i] = '\0';
+	}
+	return (tr);
+}
