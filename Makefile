@@ -5,10 +5,10 @@
 ## Login   <finet_f@epitech.net>
 ##
 ## Started on  Wed Dec 16 17:51:58 2015 Florian Finet
-## Last update Sat Dec 19 20:45:20 2015 Florian Finet
+## Last update Wed Oct 17 15:09:05 2018 Florian Finet
 ##
 
-NAME = test_libft
+NAME = test_gnl
 
 CFLAGS = -Wall -Wextra -Werror -Iinclude/
 
