@@ -16,7 +16,6 @@ SRC	= ft_isalnum.c\
           ft_lstadd.c\
           ft_memcpy.c\
           ft_putendl.c\
-	  ft_realloc.c\
           ft_strcapitalize.c\
           ft_strdel.c\
           ft_strlcat.c\
