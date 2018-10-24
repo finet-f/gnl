@@ -6,15 +6,12 @@
 /*   By: flfinet <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/08 10:57:18 by flfinet      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/24 14:06:29 by flfinet     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/24 14:07:54 by flfinet     ###    #+. /#+    ###.fr     */
 /*   Updated: 2018/10/20 13:25:18 by flfinet     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
 #include "get_next_line.h"
 
 char			*get_line(int *i, const int fd, char *rest)
