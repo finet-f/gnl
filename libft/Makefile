@@ -1,22 +1,24 @@
-##
-## Makefile for bsq in /home/finet_f/rendu/Prog_elem/BSQ/CPE_2015_BSQ
-##
-## Made by Florian Finet
-## Login   <finet_f@epitech.net>
-##
-## Started on  Wed Dec 16 17:51:58 2015 Florian Finet
-## Last update Sat Dec 19 20:45:20 2015 Florian Finet
-##
+# **************************************************************************** #
+#                                                           LE - /             #
+#                                                               /              #
+#    Makefile                                         .::    .:/ .      .::    #
+#                                                  +:+:+   +:    +:  +:+:+     #
+#    By: flfinet <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
+#                                                  #+#   #+    #+    #+#       #
+#    Created: 2018/10/24 10:47:34 by flfinet      #+#   ##    ##    #+#        #
+#    Updated: 2018/10/24 11:12:45 by flfinet     ###    #+. /#+    ###.fr      #
+#                                                          /                   #
+#                                                         /                    #
+# **************************************************************************** #
 
 NAME = libft.a
 
-CFLAGS = -Wall -Wextra -Werror -Iinclude/
+CFLAGS = -Wall -Wextra -Werror -Iincludes/
 
 SRC	= ft_isalnum.c\
           ft_lstadd.c\
           ft_memcpy.c\
           ft_putendl.c\
-	  ft_realloc.c\
           ft_strcapitalize.c\
           ft_strdel.c\
           ft_strlcat.c\
